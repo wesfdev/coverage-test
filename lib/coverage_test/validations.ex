@@ -29,4 +29,24 @@ defmodule CoverageTest.Validations do
       {:ok, value}
     end
   end
+
+  @doc """
+  Validates if a given value is a valid integer.
+
+  ## Examples
+
+      iex> CoverageTest.Validations.is_valid_int("42")
+      {:ok, 42}
+
+      iex> CoverageTest.Validations.is_valid_int("abc")
+      {:error, "Value is not an integer"}
+
+  """
+  @spec is_valid_int(String.t()) :: {:ok, integer()} | {:error, String.t()}
+  def is_valid_int(value) do
+    case Integer.parse(value) do
+      {int, _} -> {:ok, int}
+      _ -> {:error, "Value is not an integer"}
+    end
+  end
 end
