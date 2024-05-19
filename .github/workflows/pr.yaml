@@ -4,11 +4,6 @@ on:
   pull_request:
     types: [opened]
 
-env:
-  MIX_ENV: test
-  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-  COVERALLS_URL: ${{ secrets.COVERALLS_URL }}
-
 jobs:
   comment-pull-request:
     runs-on: ubuntu-latest
@@ -21,3 +16,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUSHED_GITHUB_SHA: ${{ github.event.pull_request.head.sha }}
           GITHUB_BRANCH: ${{ github.head_ref || github.ref_name }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          COVERALLS_URL: ${{ secrets.COVERALLS_URL }}
