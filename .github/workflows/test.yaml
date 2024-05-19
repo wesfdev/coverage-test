@@ -73,6 +73,7 @@ jobs:
       run: MIX_ENV=test mix coveralls.post  --branch "${{ github.ref }}" --name "localhost" --committer "${{ github.actor }}" --sha "${{ github.sha }}" --message "$(git log --format=%B -n 1 ${{ github.sha }})"
 
   comment-pull-request:
+    needs: run-tests
     runs-on: ubuntu-latest
     name: A job to generate comment based on code coverage
     steps:
