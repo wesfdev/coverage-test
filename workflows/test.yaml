@@ -1,0 +1,30 @@
+on: 
+  pull_request:
+    types: [opened]
+
+jobs:
+  run-coveralls:
+    name: Run Coveralls and Comment on PR
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Elixir
+      uses: actions/setup-elixir@v1
+
+    - name: Install dependencies
+      run: mix deps.get
+
+    - name: Run Coveralls
+      run: MIX_ENV=test mix coveralls.post  --branch "${{ github.ref }}" --name "localhost" --committer "${{ github.actor }}" --sha "${{ github.sha }}" --message "$(git log --format=%B -n 1 ${{ github.sha }})"
+  comment-pull-request:
+    runs-on: ubuntu-latest
+    name: A job to generate comment based on code coverage
+    steps:
+      - name: Code coverage action step
+        id: code_coverage
+        uses: wesfdev/my-cc-g-action@v1.6
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
