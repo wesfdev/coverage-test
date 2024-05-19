@@ -69,4 +69,29 @@ defmodule CoverageTest.ValidationsTest do
   test "is_valid_int/1 with integer string with leading plus sign" do
     assert {:ok, 42} == CoverageTest.Validations.is_valid_int("+42")
   end
+
+  test "is_valid_boolean/1 with valid boolean string" do
+    assert {:ok, true} == CoverageTest.Validations.is_valid_boolean("true")
+  end
+
+  test "is_valid_boolean/1 with invalid boolean string" do
+    assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean("abc")
+  end
+
+  test "is_valid_boolean/1 with empty string" do
+    assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean("")
+  end
+
+  test "is_valid_boolean/1 with nil value" do
+    assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean(nil)
+  end
+
+  test "is_valid_boolean/1 with whitespace string" do
+    assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean("   ")
+  end
+
+  test "is_valid_boolean/1 with case-insensitive strings" do
+    assert {:ok, true} == CoverageTest.Validations.is_valid_boolean("TRUE")
+    assert {:ok, false} == CoverageTest.Validations.is_valid_boolean("FALSE")
+  end
 end

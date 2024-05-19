@@ -62,6 +62,29 @@ defmodule CoverageTest.Validations do
     end
   end
 
+  @doc """
+  Validates if a given value is a valid boolean.
+
+  ## Examples
+
+      iex> is_valid_boolean("true")
+      {:ok, true}
+
+      iex> is_valid_boolean("false")
+      {:ok, false}
+
+      iex> is_valid_boolean("invalid")
+      {:error, "Value is not a boolean"}
+
+  ## Params
+
+  - `value` - The value to be validated.
+
+  ## Returns
+
+  - `{:ok, boolean()}` - If the value is a valid boolean.
+  - `{:error, String.t()}` - If the value is not a valid boolean.
+  """
   @spec is_valid_boolean(String.t() | nil) :: {:ok, boolean()} | {:error, String.t()}
   def is_valid_boolean(value) do
     case value do
@@ -72,6 +95,8 @@ defmodule CoverageTest.Validations do
         case value do
           "true" -> {:ok, true}
           "false" -> {:ok, false}
+          "TRUE" -> {:ok, true}
+          "FALSE" -> {:ok, false}
           _ -> {:error, "Value is not a boolean"}
         end
     end
