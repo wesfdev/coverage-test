@@ -58,7 +58,8 @@ defmodule CoverageTest.ValidationsTest do
   end
 
   test "is_valid_int/1 with large integer string" do
-    assert {:ok, 9223372036854775807} == CoverageTest.Validations.is_valid_int("9223372036854775807")
+    assert {:ok, 9_223_372_036_854_775_807} ==
+             CoverageTest.Validations.is_valid_int("9223372036854775807")
   end
 
   test "is_valid_int/1 with integer string with decimal point" do
@@ -68,5 +69,4 @@ defmodule CoverageTest.ValidationsTest do
   test "is_valid_int/1 with integer string with leading plus sign" do
     assert {:ok, 42} == CoverageTest.Validations.is_valid_int("+42")
   end
-
 end

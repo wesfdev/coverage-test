@@ -51,7 +51,9 @@ defmodule CoverageTest.Validations do
   @spec is_valid_int(String.t() | nil) :: {:ok, integer()} | {:error, String.t()}
   def is_valid_int(value) do
     case value do
-      nil -> {:error, "Value is not an integer"}
+      nil ->
+        {:error, "Value is not an integer"}
+
       _ ->
         case Integer.parse(value) do
           {int, _} -> {:ok, int}
