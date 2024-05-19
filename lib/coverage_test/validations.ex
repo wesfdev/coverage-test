@@ -61,4 +61,19 @@ defmodule CoverageTest.Validations do
         end
     end
   end
+
+  @spec is_valid_boolean(String.t() | nil) :: {:ok, boolean()} | {:error, String.t()}
+  def is_valid_boolean(value) do
+    case value do
+      nil ->
+        {:error, "Value is not a boolean"}
+
+      _ ->
+        case value do
+          "true" -> {:ok, true}
+          "false" -> {:ok, false}
+          _ -> {:error, "Value is not a boolean"}
+        end
+    end
+  end
 end
