@@ -1,11 +1,15 @@
-on: 
-  pull_request:
-    types: [opened]
+name: CI
+
+on:
+  push:
+    paths-ignore:
+      - 'docs/*'
 
 env:
   MIX_ENV: test
   COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-  COVERALLS_URL: ${{ secrets.COVERALLS_URL }}
+  COVERALLS_URL: ${{ secrets.COVERALLS_URL }} 
+
 
 jobs:
   run-tests:
@@ -40,9 +44,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-mix-${{ env.cache-name }}-
 
-    # Step: Define how to cache the `_build` directory. After the first run,
-    # this speeds up tests runs a lot. This includes not re-compiling our
-    # project's downloaded deps every run.
     - name: Cache compiled build
       id: cache-build
       uses: actions/cache@v3
@@ -55,32 +56,14 @@ jobs:
           ${{ runner.os }}-mix-${{ env.cache-name }}-
           ${{ runner.os }}-mix-
 
-    # Step: Download project dependencies. If unchanged, uses
-    # the cached version.
     - name: Install dependencies
       run: mix deps.get
 
-    # Step: Compile the project treating any warnings as errors.
-    # Customize this step if a different behavior is desired.
     - name: Compiles without warnings
       run: mix compile --warnings-as-errors
 
-    # Step: Check that the checked in code has already been formatted.
-    # This step fails if something was found unformatted.
-    # Customize this step as desired.
     - name: Check Formatting
       run: mix format --check-formatted
 
     - name: Run Coveralls
-      run: MIX_ENV=test mix coveralls.post  --branch "${{ github.ref }}" --name "localhost" --committer "${{ github.actor }}" --sha "${{ github.sha }}" --message "$(git log --format=%B -n 1 ${{ github.sha }})"
-
-  comment-pull-request:
-    needs: run-tests
-    runs-on: ubuntu-latest
-    name: A job to generate comment based on code coverage
-    steps:
-      - name: Code coverage action step
-        id: code_coverage
-        uses: wesfdev/my-cc-g-action@v1.6
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: MIX_ENV=test mix coveralls.post  --branch "${{ github.head_ref || github.ref_name }}" --name "localhost" --committer "${{ github.actor }}" --sha "${{ github.sha }}" --message "${{ github.event.head_commit.message }}"
