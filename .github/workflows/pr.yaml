@@ -17,6 +17,7 @@ jobs:
     steps:
       - name: Code coverage action step
         id: code_coverage
-        uses: wesfdev/my-cc-g-action@v1.6
+        uses: wesfdev/my-cc-g-action@v1.7
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUSHED_GITHUB_SHA: ${{ github.event.pull_request.head.sha }}
