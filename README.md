@@ -1,4 +1,4 @@
-# CoverageTest
+# CoverageTest1
 
 To start your Phoenix server:
 
