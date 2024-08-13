@@ -70,7 +70,7 @@ jobs:
 
   comment-pull-request:
     runs-on: ubuntu-latest
-    if: github.event.pull_request && github.event.pull_request.state == 'open'
+    if: github.event.pull_request
 
     name: A job to generate comment based on code coverage
     steps:
