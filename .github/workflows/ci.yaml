@@ -40,7 +40,7 @@ jobs:
         echo "USER: $USER"
 
         PR_NUMBER=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          "https://api.github.com/repos/${{ github.repository }}/pulls?state=open&head=$USER:${{ github.ref_name }}" | \
+          "https://api.github.com/repos/${{ github.repository }}/pulls?state=open&head=$USER:${{ github.head_ref || github.ref_name }}" | \
           jq '.[0].number')
         echo "PR_NUMBER: $PR_NUMBER"
         
@@ -89,4 +89,4 @@ jobs:
       run: mix format --check-formatted
 
     - name: Run Coveralls
-      run: MIX_ENV=test mix coveralls.post  --branch "${{ github.head_ref || github.ref_name }}" --name "ci_workflow" --committer "${{ github.actor }}" --sha "${{ github.sha }}" --message "${{ github.event.head_commit.message }}"
+      run: MIX_ENV=test mix coveralls.post  --branch "${{ github.head_ref || github.ref_name }}" --name "ci_workflow" --committer "${{ github.actor }}" --sha "${{ github.event.pull_request.head.sha || github.sha }}" --message "${{ github.event.head_commit.message }}"
