@@ -3,15 +3,24 @@ name: PR
 on: 
   pull_request:
     types: [opened]
+  issue_comment:
+    types: [created]
+
 
 jobs:
   comment-pull-request:
     runs-on: ubuntu-latest
     name: A job to generate comment based on code coverage
+    # Only run if we're invoked with a new command comment on a pull request.
+    if: |
+      github.event_name == 'issue_comment' && github.event.action == 'created'
+      && github.event.issue.pull_request != null
+      && (startsWith(github.event.comment.body, '/coverage'))
+
     steps:
       - name: Code coverage action step
         id: code_coverage
-        uses: wesfdev/my-cc-g-action@v1.9
+        uses: wesfdev/my-cc-g-action@v1.11
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUSHED_GITHUB_SHA: ${{ github.event.pull_request.head.sha }}
