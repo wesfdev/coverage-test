@@ -1,6 +1,10 @@
 name: CI
 
 on:
+  pull_request:
+    branches: 
+      - main
+      - master
   push:
     paths-ignore:
       - 'docs/*'
@@ -70,7 +74,6 @@ jobs:
 
   comment-pull-request:
     runs-on: ubuntu-latest
-    if: github.event.pull_request
 
     name: A job to generate comment based on code coverage
     steps:
