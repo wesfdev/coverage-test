@@ -67,19 +67,3 @@ jobs:
 
     - name: Run Coveralls
       run: MIX_ENV=test mix coveralls.post  --branch "${{ github.head_ref || github.ref_name }}" --name "ci_workflow" --committer "${{ github.actor }}" --sha "${{ github.sha }}" --message "${{ github.event.head_commit.message }}"
-
-  comment-pull-request:
-    runs-on: ubuntu-latest
-    if: github.event.pull_request
-
-    name: A job to generate comment based on code coverage
-    steps:
-      - name: Code coverage action step
-        id: code_coverage
-        uses: wesfdev/my-cc-g-action@v1.9
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUSHED_GITHUB_SHA: ${{ github.event.pull_request.head.sha }}
-          GITHUB_BRANCH: ${{ github.head_ref || github.ref_name }}
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-          COVERALLS_URL: ${{ secrets.COVERALLS_URL }}
