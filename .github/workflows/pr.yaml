@@ -23,7 +23,7 @@ jobs:
         uses: wesfdev/my-cc-g-action@v1.11
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUSHED_GITHUB_SHA: ${{ github.event.pull_request.head.sha }}
+          PUSHED_GITHUB_SHA: ${{ github.event.pull_request.head.sha || github.sha}}
           GITHUB_BRANCH: ${{ github.head_ref || github.ref_name }}
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
           COVERALLS_URL: ${{ secrets.COVERALLS_URL }}
