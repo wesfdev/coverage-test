@@ -82,6 +82,7 @@ jobs:
 
   fetch_pr_number:
     runs-on: ubuntu-latest
+    needs: run-tests
     outputs:
       pr_number: ${{ steps.get_pr_number.outputs.pr_number }}
     steps:
