@@ -73,6 +73,7 @@ jobs:
       run: MIX_ENV=test mix coveralls.post  --branch "${{ github.head_ref || github.ref_name }}" --name "ci_workflow" --committer "${{ github.actor }}" --sha "${{ github.sha }}" --message "${{ github.event.head_commit.message }}"
 
   comment-pull-request:
+    needs: run-tests
     runs-on: ubuntu-latest
 
     name: A job to generate comment based on code coverage
