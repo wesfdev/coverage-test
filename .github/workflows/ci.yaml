@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - '**'
-  pull_request:
-    branches:
-      - main
-      - master
 
 env:
   MIX_ENV: test
@@ -31,7 +27,18 @@ jobs:
         echo "Github github.event.pull_request: ${{ github.event.pull_request }}"
         echo "Github github.sha: ${{ github.sha }}"
         echo "Github github.event.pull_request.head.sha: ${{ github.event.pull_request.head.sha }}"
+        echo "Github github.ref_name: ${{ github.ref_name }}"
+        echo "Github github.head_ref: ${{ github.head_ref }}"
+        echo "Github github.repository: ${{ github.repository }}"
 
+    - name: Get PR Associated with the Branch
+      id: get_pr
+      run: |
+        PR_NUMBER=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/${{ github.repository }}/pulls?state=open&head=${{ github.repository }}:${{ github.ref_name }}" | \
+          jq '.[0].number')
+        echo "PR_NUMBER: $PR_NUMBER"
+        
     # Step: Setup Elixir + Erlang image as the base.
     - name: Set up Elixir
       uses: erlef/setup-beam@v1
