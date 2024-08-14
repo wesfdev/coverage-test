@@ -2,8 +2,12 @@ name: CI
 
 on:
   push:
-    paths-ignore:
-      - 'docs/*'
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - main
+      - master
 
 env:
   MIX_ENV: test
@@ -21,6 +25,13 @@ jobs:
         elixir: ['1.14.1']    # Define the elixir version [required]    
 
     steps:
+    - name: Print gitHub values
+      run: |
+        echo "GitHub github.event_name: ${{ github.event_name }}"
+        echo "Github github.event.pull_request: ${{ github.event.pull_request }}"
+        echo "Github github.sha: ${{ github.sha }}"
+        echo "Github github.event.pull_request.head.sha: ${{ github.event.pull_request.head.sha }}"
+
     # Step: Setup Elixir + Erlang image as the base.
     - name: Set up Elixir
       uses: erlef/setup-beam@v1
