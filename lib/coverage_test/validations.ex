@@ -102,7 +102,7 @@ defmodule CoverageTest.Validations do
     end
   end
 
-  def check_value(value)do
+  def check_value(value) do
     if is_nil(value) do
       :skip
     else
