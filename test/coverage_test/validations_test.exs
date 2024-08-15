@@ -82,16 +82,16 @@ defmodule CoverageTest.ValidationsTest do
     assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean("")
   end
 
-  # test "is_valid_boolean/1 with nil value" do
-  #  assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean(nil)
-  # end
+  test "is_valid_boolean/1 with nil value" do
+    assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean(nil)
+  end
 
-  # test "is_valid_boolean/1 with whitespace string" do
-  #   assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean("   ")
-  # end
+  test "is_valid_boolean/1 with whitespace string" do
+     assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean("   ")
+  end
 
-  # test "is_valid_boolean/1 with case-insensitive strings" do
-  #  assert {:ok, true} == CoverageTest.Validations.is_valid_boolean("TRUE")
-  #  assert {:ok, false} == CoverageTest.Validations.is_valid_boolean("FALSE")
-  # end
+  test "is_valid_boolean/1 with case-insensitive strings" do
+    assert {:ok, true} == CoverageTest.Validations.is_valid_boolean("TRUE")
+    assert {:ok, false} == CoverageTest.Validations.is_valid_boolean("FALSE")
+  end
 end
