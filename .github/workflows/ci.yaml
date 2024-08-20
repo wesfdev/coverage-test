@@ -77,7 +77,7 @@ jobs:
 
   fetch_pr_number:
     runs-on: ubuntu-latest
-    needs: run-tests
+    needs: run-format
     outputs:
       pr_number: ${{ steps.get_pr_number.outputs.pr_number }}
     steps:
@@ -179,7 +179,9 @@ jobs:
 
   comment-pull-request:
     runs-on: ubuntu-latest
-    needs: fetch_pr_number
+    needs: 
+      - fetch_pr_number
+      - post-tests
     if: needs.fetch_pr_number.outputs.pr_number != 'null'
     name: A job to generate comment based on code coverage
 
