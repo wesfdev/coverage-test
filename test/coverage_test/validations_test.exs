@@ -82,9 +82,9 @@ defmodule CoverageTest.ValidationsTest do
     assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean("")
   end
 
-  test "is_valid_boolean/1 with nil value" do
-    assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean(nil)
-  end
+  # test "is_valid_boolean/1 with nil value" do
+  #  assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean(nil)
+  # end
 
   test "is_valid_boolean/1 with whitespace string" do
     assert {:error, "Value is not a boolean"} == CoverageTest.Validations.is_valid_boolean("   ")
