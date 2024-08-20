@@ -113,12 +113,12 @@ jobs:
       - name: Determine if this workflow should run
         id: determine
         run: |
-          EXIST_PULL_REQUEST=$(echo "${{ needs.fetch_pr_number.outputs.pr_number }}")
+          PULL_REQUEST=$(echo "${{ needs.fetch_pr_number.outputs.pr_number }}")
           BRANCH=$(echo "${{ github.head_ref || github.ref_name }}")
 
-          if $EXIST_PULL_REQUEST != 'null'; then
+          if [[ $PULL_REQUEST != 'null' ]]; then
             SHOULD_RUN=$(echo "true")
-            echo "SHOULD_RUN EXIST_PULL_REQUEST: $SHOULD_RUN"
+            echo "SHOULD_RUN PULL_REQUEST: $SHOULD_RUN"
             echo "::set-output name=should_run::$SHOULD_RUN"
           elif [[ "$BRANCH" == "main" ]] || [[ "$BRANCH" == "master" ]]; then
             SHOULD_RUN=$(echo "true")
