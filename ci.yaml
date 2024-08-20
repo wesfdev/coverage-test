@@ -102,10 +102,40 @@ jobs:
           echo "PR_NUMBER: $PR_NUMBER"
           echo "::set-output name=pr_number::$PR_NUMBER"
 
+  gatekeeper:
+    runs-on: ubuntu-latest
+    needs: fetch_pr_number
+
+    outputs:
+      should_run: ${{ steps.determine.outputs.should_run }}
+
+    steps:
+      - name: Determine if this workflow should run
+        id: determine
+        run: |
+          PULL_REQUEST=$(echo "${{ needs.fetch_pr_number.outputs.pr_number }}")
+          BRANCH=$(echo "${{ github.head_ref || github.ref_name }}")
+
+          if [[ $PULL_REQUEST != 'null' ]]; then
+            SHOULD_RUN=$(echo "true")
+            echo "SHOULD_RUN PULL_REQUEST: $SHOULD_RUN"
+            echo "::set-output name=should_run::$SHOULD_RUN"
+          elif [[ "$BRANCH" == "main" ]] || [[ "$BRANCH" == "master" ]]; then
+            SHOULD_RUN=$(echo "true")
+            echo "SHOULD_RUN NOT EXIST PR, BUT IS MAIN/MASTER PUSH: $SHOULD_RUN"
+            echo "::set-output name=should_run::$SHOULD_RUN"          
+          else
+            SHOULD_RUN=$(echo "false")
+            echo "SHOULD_RUN: $SHOULD_RUN"
+            echo "::set-output name=should_run::$SHOULD_RUN"
+          fi
+
   post-tests:
     runs-on: ubuntu-latest
     needs: 
       - fetch_pr_number
+      - gatekeeper
+    if: needs.gatekeeper.outputs.should_run == 'true'
     name: Test on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
 
     strategy:
