@@ -76,7 +76,7 @@ jobs:
       run: mix format --check-formatted
 
     - name: Run Coveralls
-      run: MIX_ENV=test mix coveralls.post  --branch "${{ github.head_ref || github.ref_name }}" --name "ci_workflow" --committer "${{ github.actor }}" --sha "${{ github.event.pull_request.head.sha || github.sha }}" --message "${{ github.event.head_commit.message }}"
+      run: MIX_ENV=test mix coveralls.post  --branch "${{ github.head_ref || github.ref_name }}" --name "github_ci_workflow" --committer "${{ github.actor }}" --sha "${{ github.event.pull_request.head.sha || github.sha }}" --message "${{ github.event.head_commit.message }}"
 
   fetch_pr_number:
     runs-on: ubuntu-latest
@@ -113,7 +113,7 @@ jobs:
     steps:
       - name: Code coverage action step
         id: code_coverage
-        uses: wesfdev/my-cc-g-action@v1.13
+        uses: wesfdev/my-cc-g-action@v1.14
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUSHED_GITHUB_SHA: ${{ github.event.pull_request.head.sha || github.sha}}
