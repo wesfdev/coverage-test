@@ -30,6 +30,7 @@ jobs:
         echo "Github github.ref_name: ${{ github.ref_name }}"
         echo "Github github.head_ref: ${{ github.head_ref }}"
         echo "Github github.repository: ${{ github.repository }}"
+        echo "Github github.base_ref: ${{ github.base_ref }}"
         
     # Step: Setup Elixir + Erlang image as the base.
     - name: Set up Elixir
