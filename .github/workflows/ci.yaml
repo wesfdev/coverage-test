@@ -128,7 +128,7 @@ jobs:
     needs: 
       - fetch_pr_number
       - gatekeeper
-    if: needs.fetch_pr_number.outputs.pr_number != 'null' && needs.gatekeeper.outputs.should_run == 'true'
+    if: needs.gatekeeper.outputs.should_run == 'true'
     name: Test on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
 
     strategy:
