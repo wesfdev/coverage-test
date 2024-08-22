@@ -9,6 +9,7 @@ env:
   MIX_ENV: test
   COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
   COVERALLS_URL: ${{ secrets.COVERALLS_URL }} 
+  COVERAGE_PLATFORM_TOKEN: ${{ secrets.COVERAGE_PLATFORM_TOKEN }} 
 
 
 jobs:
@@ -169,7 +170,7 @@ jobs:
     steps:
       - name: Code coverage action step
         id: code_coverage
-        uses: wesfdev/my-cc-g-action@v1.14
+        uses: wesfdev/my-cc-g-action@v1.15
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUSHED_GITHUB_SHA: ${{ github.event.pull_request.head.sha || github.sha}}
@@ -177,3 +178,5 @@ jobs:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
           COVERALLS_URL: ${{ secrets.COVERALLS_URL }}
           PR_NUMBER: ${{ needs.fetch_pr_number.outputs.pr_number }}
+          COVERAGE_PLATFORM_TOKEN: ${{ secrets.COVERAGE_PLATFORM_TOKEN }}
+          
