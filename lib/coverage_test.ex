@@ -10,4 +10,9 @@ defmodule CoverageTest do
   def hello do
     IO.puts("Hello, world!")
   end
+
+  def test do
+    test = 1
+    IO.puts("test, world!: #{inspect(test)}")
+  end
 end
