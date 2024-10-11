@@ -18,7 +18,7 @@ defmodule CoverageTest do
 
   def test_a do
     test = 1
-    IO.puts("test, world!: #{inspect(test)}")
+    IO.puts("test, worldewqe!: #{inspect(test)}")
   end
 
   def test_b do
