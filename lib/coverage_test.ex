@@ -15,4 +15,14 @@ defmodule CoverageTest do
     test = 1
     IO.puts("test, world!: #{inspect(test)}")
   end
+
+  def test_a do
+    test = 1
+    IO.puts("test, world!: #{inspect(test)}")
+  end
+
+  def test_b do
+    test = 1
+    IO.puts("test, world!: #{inspect(test)}")
+  end
 end
