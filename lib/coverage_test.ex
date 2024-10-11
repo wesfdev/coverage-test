@@ -8,7 +8,7 @@ defmodule CoverageTest do
   """
 
   def hello do
-    IO.puts("Hello, worlddsdsdsa!")
+    IO.puts("Hello, worlddsdsdsadsad!")
   end
 
   def test do
