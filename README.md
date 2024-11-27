@@ -1,6 +1,6 @@
 # Coverage Test
 [![Coverage Status](https://coverage-zib09.zubale.com/projects/1/badge.svg)](https://coverage-zib09.zubale.com/projects/1)
-
+1
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
