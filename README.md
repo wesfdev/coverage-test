@@ -16,7 +16,7 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Official website: https://www.phoenixframework.org/
   * Guides: https://hexdocs.pm/phoenix/overview.html
   * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
+  * Forum: https://elixirforum.com/c/phoenix-forumdsadas
   * Source: https://github.com/phoenixframework/phoenix
 dsadsad
 dasdasd
