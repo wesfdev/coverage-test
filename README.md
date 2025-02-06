@@ -2,7 +2,7 @@ xs
 # Coverage Testdsads
 ds[![Coverage Status](https://coverage-zib09.zubale.com/projects/1/badge.svg)](https://coverage-zib09.zubale.com/projects/1)
 
-To start your Phoenix server:
+To start your Phoenix server:ds
 
   * Run `mix setup` to install and setup dependencies
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
