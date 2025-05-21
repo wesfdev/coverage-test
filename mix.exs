@@ -24,8 +24,11 @@ defmodule CoverageTest.MixProject do
   end
 
   # Configuration for the OTP application.
-  #
   # Type `mix help compile.app` for more information.
+  # 1
+  # 2
+  # 3
+  # 4
   def application do
     [
       mod: {CoverageTest.Application, []},
